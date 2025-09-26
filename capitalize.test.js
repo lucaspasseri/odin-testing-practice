@@ -5,18 +5,23 @@ test("Basic path", () => {
 	expect(capitalize(input)).toBe("String");
 });
 
-test("Input type different from string", () => {
-	const input = null;
-	const input1 = undefined;
-	const input2 = false;
-	const input3 = 0;
-	expect(capitalize(input)).toBe("");
-	expect(capitalize(input1)).toBe("");
-	expect(capitalize(input2)).toBe("");
-	expect(capitalize(input3)).toBe("");
+test("Type different from string", () => {
+	const inputs = [null, undefined, false, 0, [], {}];
+	inputs.forEach(input => expect(capitalize(input)).toBe(""));
 });
-
 test("Empty string", () => {
 	const input = "";
 	expect(capitalize(input)).toBe("");
+});
+
+test("Starting space", () => {
+	const input = " banana";
+	expect(capitalize(input)).toBe(" banana");
+});
+
+test("Input that can not be capitalize", () => {
+	const inputs = ["!", "123", "🙂"];
+	inputs.forEach((input, index) =>
+		expect(capitalize(input)).toBe(inputs[index])
+	);
 });

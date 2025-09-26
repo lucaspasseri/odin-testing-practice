@@ -5,13 +5,21 @@ test("Basic path", () => {
 	expect(reverseString(input)).toBe("gnirts");
 });
 
-test("Input different from string ", () => {
-	const input = null;
-	const input1 = undefined;
-	const input2 = false;
-	const input3 = 0;
-	expect(reverseString(input)).toBe("");
-	expect(reverseString(input1)).toBe("");
-	expect(reverseString(input2)).toBe("");
-	expect(reverseString(input3)).toBe("");
+test("Type different from string", () => {
+	const invalidInputs = [null, undefined, false, 0];
+	invalidInputs.forEach(input => {
+		expect(reverseString(input)).toBe("");
+	});
+});
+
+test("Empty string", () => {
+	expect(reverseString("")).toBe("");
+});
+
+test("String with spaces", () => {
+	expect(reverseString(" ab ")).toBe(" ba ");
+});
+
+test("String with emoji", () => {
+	expect(reverseString("🙂🙃")).toBe("🙃🙂");
 });

@@ -10,23 +10,35 @@ test("Basic path", () => {
 });
 
 test("Type different from number", () => {
-	const inputs = [null, undefined, false, "abc"];
+	const inputs = [null, undefined, NaN, false, "abc", [], {}];
 	inputs.forEach(input => {
-		expect(calculator.add(input, input)).toBe(null);
+		expect(() => calculator.add(0, input)).toThrow("Inputs must be numbers");
+		expect(() => calculator.add(input, 0)).toThrow("Inputs must be numbers");
 	});
 	inputs.forEach(input => {
-		expect(calculator.subtract(input, input)).toBe(null);
+		expect(() => calculator.subtract(0, input)).toThrow(
+			"Inputs must be numbers"
+		);
+		expect(() => calculator.subtract(input, 0)).toThrow(
+			"Inputs must be numbers"
+		);
 	});
 	inputs.forEach(input => {
-		expect(calculator.divide(input, input)).toBe(null);
+		expect(() => calculator.divide(0, input)).toThrow("Inputs must be numbers");
+		expect(() => calculator.divide(input, 0)).toThrow("Inputs must be numbers");
 	});
 	inputs.forEach(input => {
-		expect(calculator.multiply(input, input)).toBe(null);
+		expect(() => calculator.multiply(0, input)).toThrow(
+			"Inputs must be numbers"
+		);
+		expect(() => calculator.multiply(input, 0)).toThrow(
+			"Inputs must be numbers"
+		);
 	});
 });
 
 test("Divide by zero", () => {
 	const a = 10;
 	const b = 0;
-	expect(calculator.divide(a, b)).toBe(null);
+	expect(() => calculator.divide(a, b)).toThrow("Cannot divide by zero");
 });
